@@ -4,7 +4,7 @@ export const sample = (arr) => {
 
 export const range = (start, end, step = 1) => {
   let output = [];
-  if (typeof end === 'undefined') {
+  if (typeof end === "undefined") {
     end = start;
     start = 0;
   }
@@ -12,4 +12,23 @@ export const range = (start, end, step = 1) => {
     output.push(i);
   }
   return output;
+};
+
+export const twoDimensionObjectArray = (
+  firstArrayLength,
+  secondArrayLength
+) => {
+  return range(firstArrayLength).map(() => {
+    const emptyObjectArray = range(0, secondArrayLength).map((x) => {
+      return {
+        id: crypto.randomUUID(),
+        value: "",
+      };
+    });
+
+    return {
+      id: crypto.randomUUID(),
+      values: emptyObjectArray,
+    };
+  });
 };
