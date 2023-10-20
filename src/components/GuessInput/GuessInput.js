@@ -29,6 +29,8 @@ function GuessInput({ handleGuess, disabled }) {
         id='guess-input'
         type='text'
         value={guess}
+        pattern='[a-zA-Z]{5}'
+        title='5 letter word'
         autoFocus
         onChange={handleOnChange}
         disabled={disabled}
