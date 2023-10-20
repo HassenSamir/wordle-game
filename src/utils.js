@@ -13,22 +13,3 @@ export const range = (start, end, step = 1) => {
   }
   return output;
 };
-
-export const twoDimensionObjectArray = (
-  firstArrayLength,
-  secondArrayLength
-) => {
-  return range(firstArrayLength).map(() => {
-    const emptyObjectArray = range(0, secondArrayLength).map((x) => {
-      return {
-        id: crypto.randomUUID(),
-        value: "",
-      };
-    });
-
-    return {
-      id: crypto.randomUUID(),
-      values: emptyObjectArray,
-    };
-  });
-};

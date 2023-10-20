@@ -1,25 +1,25 @@
 import React from "react";
 
+const MAX_LETTERS = 5;
+
 function GuessInput({ handleGuess, disabled }) {
-  const MAX_GUESS_LENGTH = 5;
   const [guess, setGuess] = React.useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (guess.length !== 5) {
       window.alert("The guess should have 5 letters !");
       return;
     }
-
     handleGuess(guess);
     setGuess("");
   };
 
-  const handleOnChange = (e) => {
-    if (e.target.value.length > MAX_GUESS_LENGTH) {
+  const handleOnChange = (event) => {
+    if (event.target.value.length > MAX_LETTERS) {
       return;
     }
-    setGuess(e.target.value.toUpperCase());
+    setGuess(event.target.value.toUpperCase());
   };
 
   return (

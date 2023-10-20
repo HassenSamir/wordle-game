@@ -5,6 +5,7 @@ import { WORDS } from "../../data";
 import GuessInput from "../GuessInput/GuessInput";
 import Guesses from "../Guesses/Guesses";
 import Banner from "../Banner/Banner";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -13,25 +14,25 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = React.useState([]);
-  const [endGame, setEndGame] = React.useState(false);
+  const [gameOver, setGameOver] = React.useState(false);
+
   const addGuess = (value) => {
-    const nextGuesses = [...guesses, { id: crypto.randomUUID(), value }];
-    setGuesses(nextGuesses);
+    setGuesses([...guesses, { id: crypto.randomUUID(), value }]);
   };
 
   useEffect(() => {
     const userWon = guesses.map(({ value }) => value).includes(answer);
-    const sixGuesses = guesses.length >= 6;
+    const sixGuesses = guesses.length >= NUM_OF_GUESSES_ALLOWED;
     if (userWon || sixGuesses) {
-      setEndGame(true);
+      setGameOver(true);
     }
   }, [guesses]);
 
   return (
     <>
       <Guesses answer={answer} guesses={guesses} />
-      <GuessInput handleGuess={addGuess} disabled={endGame} />
-      {endGame && (
+      <GuessInput handleGuess={addGuess} disabled={gameOver} />
+      {gameOver && (
         <Banner
           win={guesses.map(({ value }) => value).includes(answer)}
           guesses={guesses}
